@@ -9,11 +9,11 @@ module Downloader
     # TODO: add file error handling (new error class)
     urls = File.open(input_file, 'r').readlines
 
-    domain = UrlHelper.extract_host_with_scheme(urls[0])
+    host_with_scheme = UrlHelper.extract_host_with_scheme(urls[0])
 
-    puts domain
+    puts host_with_scheme
 
-    http = HTTP.persistent(domain)
+    http = HTTP.persistent(host_with_scheme)
 
     urls.each do |url|
       partial_url = URI(url).path
