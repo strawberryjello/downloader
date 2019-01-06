@@ -16,12 +16,12 @@ module Downloader
     http = HTTP.persistent(host_with_scheme)
 
     urls.each do |url|
-      path = URI(url).path
-      puts path
+      relative_ref = UrlHelper.extract_relative_ref(url)
+      puts relative_ref
 
       filename = UrlHelper.extract_filename(url)
       File.open(File.join(dest, filename), 'w') do |f|
-        f.write(http.get(path))
+        f.write(http.get(relative_ref))
       end
     end
 
