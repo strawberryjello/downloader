@@ -16,12 +16,12 @@ module Downloader
     http = HTTP.persistent(host_with_scheme)
 
     urls.each do |url|
-      partial_url = URI(url).path
-      puts partial_url
+      path = URI(url).path
+      puts path
 
-      filename = partial_url.slice(/\/[a-zA-Z0-9_.\-]+$/).chomp
+      filename = path.slice(/\/[a-zA-Z0-9_.\-]+$/).chomp
       File.open(File.join(dest, filename), 'w') do |f|
-        f.write(http.get(partial_url))
+        f.write(http.get(path))
       end
     end
 
