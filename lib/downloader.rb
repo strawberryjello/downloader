@@ -1,27 +1,27 @@
 require "downloader/version"
+require "downloader/errors"
+require "downloader/url_helper"
 require 'http'
+require 'uri'
 
 module Downloader
-  # class Error < StandardError; end
-
   def self.batch(input_file, dest)
+    # TODO: add file error handling (new error class)
     urls = File.open(input_file, 'r').readlines
 
-    # this could be made more generic,
-    # eg for domains that don't end in .com
-    domain = urls[0].slice(/http[s]?:\/\/[a-z0-9\.]+.com/)
+    host_with_scheme = UrlHelper.extract_host_with_scheme(urls[0])
 
-    puts domain
+    puts host_with_scheme
 
-    http = HTTP.persistent(domain)
+    http = HTTP.persistent(host_with_scheme)
 
     urls.each do |url|
-      partial_url = url.sub(domain, '')
-      puts partial_url
+      relative_ref = UrlHelper.extract_relative_ref(url)
+      puts relative_ref
 
-      filename = url.slice(/\/[a-zA-Z0-9_.\-]+$/).chomp
+      filename = UrlHelper.extract_filename(url)
       File.open(File.join(dest, filename), 'w') do |f|
-        f.write(http.get(partial_url))
+        f.write(http.get(relative_ref))
       end
     end
 
