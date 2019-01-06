@@ -32,5 +32,17 @@ module Downloader
 
       filename
     end
+
+    def self.extract_relative_ref(url)
+      uri = URI(url)
+
+      raise UriError, "Cannot extract path from URL: #{url}" if uri.path.nil? || uri.path.empty?
+
+      relative_ref = URI(uri.path)
+      relative_ref.query ||= uri.query
+      relative_ref.fragment ||= uri.fragment
+
+      relative_ref
+    end
   end
 end
