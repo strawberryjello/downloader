@@ -1,32 +1,15 @@
 require "downloader/version"
 require "downloader/errors"
+require "downloader/url_helper"
 require 'http'
 require 'uri'
 
 module Downloader
-  # TODO: move to utility class in separate file
-  def self.extract_domain(url)
-    uri = URI(url)
-    host = uri.host
-    scheme = uri.scheme
-
-    raise UriError, "Missing scheme" unless scheme
-
-    case (scheme)
-    when 'https'
-      URI::HTTPS.build(host: host)
-    when 'http'
-      URI::HTTP.build(host: host)
-    else
-      raise UriError, "Scheme not implemented: #{scheme}"
-    end
-  end
-
   def self.batch(input_file, dest)
     # TODO: add file error handling (new error class)
     urls = File.open(input_file, 'r').readlines
 
-    domain = extract_domain(urls[0])
+    domain = UrlHelper.extract_domain(urls[0])
 
     puts domain
 
