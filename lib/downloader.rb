@@ -19,7 +19,7 @@ module Downloader
       path = URI(url).path
       puts path
 
-      filename = path.slice(/\/[a-zA-Z0-9_.\-]+$/).chomp
+      filename = UrlHelper.extract_filename(url)
       File.open(File.join(dest, filename), 'w') do |f|
         f.write(http.get(path))
       end

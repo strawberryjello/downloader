@@ -3,6 +3,8 @@ module Downloader
     HTTP_SCHEME = "http"
     HTTPS_SCHEME = "https"
 
+    FILENAME_REGEX = %r{\/[a-zA-Z0-9_.\-]+$}
+
     def self.extract_host_with_scheme(url)
       uri = URI(url)
       host = uri.host
@@ -18,6 +20,17 @@ module Downloader
       else
         raise UriError, "Cannot handle scheme: #{scheme}"
       end
+    end
+
+    def self.extract_filename(url)
+      uri = URI(url)
+      path = uri.path
+
+      filename = path.slice(FILENAME_REGEX)&.chomp
+
+      raise UriError, "Cannot extract filename from path: #{path}" unless filename
+
+      filename
     end
   end
 end
