@@ -3,7 +3,7 @@ module Downloader
     HTTP_SCHEME = "http"
     HTTPS_SCHEME = "https"
 
-    def self.extract_domain(url)
+    def self.extract_host_with_scheme(url)
       uri = URI(url)
       host = uri.host
       scheme = uri.scheme

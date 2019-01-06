@@ -9,7 +9,7 @@ module Downloader
     # TODO: add file error handling (new error class)
     urls = File.open(input_file, 'r').readlines
 
-    domain = UrlHelper.extract_domain(urls[0])
+    domain = UrlHelper.extract_host_with_scheme(urls[0])
 
     puts domain
 
