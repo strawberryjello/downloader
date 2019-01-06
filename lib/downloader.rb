@@ -1,8 +1,8 @@
 require "downloader/version"
+require "downloader/errors"
 require 'http'
 
 module Downloader
-  # class Error < StandardError; end
 
   def self.batch(input_file, dest)
     urls = File.open(input_file, 'r').readlines
