@@ -31,7 +31,7 @@ Or install it yourself as:
 Download a single file:
 
 ```ruby
-Downloader.download(<URL>, "/path/to/downloaded/file")
+Downloader.download(<URL>)
 ```
 
 Download multiple files whose URLs are saved to a text file:
@@ -50,7 +50,7 @@ List the available commands:
 
 Download a single file:
 
-    $ bundle exec exe/downloader download <url> /path/to/downloaded/file
+    $ bundle exec exe/downloader download <url>
 
 Download multiple files:
 
