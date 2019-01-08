@@ -51,6 +51,22 @@ RSpec.describe Downloader::UrlHelper do
       expect(Downloader::UrlHelper.extract_filename('https://www.example.com/cats/2cat')).to eq('2cat')
     end
 
+    it 'extracts a filename with an extension from a URL with a query string' do
+      expect(Downloader::UrlHelper.extract_filename('https://www.example.com/cats/catting.jpg?id=1&floof=true')).to eq('catting.jpg')
+    end
+
+    it 'extracts a filename with an extension from a URL with a fragment' do
+      expect(Downloader::UrlHelper.extract_filename('https://www.example.com/cats/catting.jpg#top')).to eq('catting.jpg')
+    end
+
+    it 'extracts a filename without an extension from a URL with a query string' do
+      expect(Downloader::UrlHelper.extract_filename('https://www.example.com/cats/2cat?id=1&floof=true')).to eq('2cat')
+    end
+
+    it 'extracts a filename without an extension from a URL with a fragment' do
+      expect(Downloader::UrlHelper.extract_filename('https://www.example.com/cats/2cat#top')).to eq('2cat')
+    end
+
     it 'raises a UriError when a filename cannot be extracted' do
       expect { Downloader::UrlHelper.extract_filename('https://www.example.com/cats/') }.to raise_error(Downloader::UriError, 'Cannot extract filename from path: /cats/')
     end
