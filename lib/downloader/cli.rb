@@ -12,9 +12,9 @@ module Downloader
       Downloader.batch(input_file, dest)
     end
 
-    desc "download URL DEST", "download URL to DEST file path"
-    def download(url, dest)
-      Downloader.download(url, dest)
+    desc "download URL", "download URL to current directory"
+    def download(url)
+      Downloader.download(url)
     end
   end
 end

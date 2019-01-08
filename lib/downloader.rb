@@ -32,8 +32,10 @@ module Downloader
     http.close
   end
 
-  def self.download(url, file)
-    File.open(file, 'w') do |f|
+  def self.download(url)
+    filename = UrlHelper.extract_filename(url)
+
+    File.open(filename, 'w') do |f|
       f.write(HTTP.get(url))
     end
   end
