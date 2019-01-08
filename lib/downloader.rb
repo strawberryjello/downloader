@@ -2,22 +2,26 @@ require "downloader/version"
 require "downloader/errors"
 require "downloader/url_helper"
 require 'http'
+require 'logger'
 require 'uri'
 
 module Downloader
   def self.batch(input_file, dest)
+    logger = Logger.new(STDOUT)
+
     # TODO: add file error handling (new error class)
     urls = File.open(input_file, 'r').readlines
 
     host_with_scheme = UrlHelper.extract_host_with_scheme(urls[0])
 
-    puts host_with_scheme
+    logger.info("Connecting to #{host_with_scheme}")
 
     http = HTTP.persistent(host_with_scheme)
 
     urls.each do |url|
       relative_ref = UrlHelper.extract_relative_ref(url)
-      puts relative_ref
+
+      logger.info("Downloading #{relative_ref}")
 
       filename = UrlHelper.extract_filename(url)
       File.open(File.join(dest, filename), 'w') do |f|
