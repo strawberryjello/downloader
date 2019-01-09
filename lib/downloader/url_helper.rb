@@ -5,8 +5,13 @@ module Downloader
 
     FILENAME_REGEX = %r{\/(?<filename>[a-zA-Z0-9_.\-]+)$}
 
+    # TODO: add escaping, etc
+    def self.sanitize(url)
+      url.strip
+    end
+
     def self.extract_host_with_scheme(url)
-      uri = URI(url)
+      uri = URI(sanitize(url))
       host = uri.host
       scheme = uri.scheme
 
@@ -23,7 +28,7 @@ module Downloader
     end
 
     def self.extract_filename(url)
-      uri = URI(url)
+      uri = URI(sanitize(url))
       path = uri.path
 
       filename = path.slice(FILENAME_REGEX, "filename")&.chomp
@@ -34,7 +39,7 @@ module Downloader
     end
 
     def self.extract_relative_ref(url)
-      uri = URI(url)
+      uri = URI(sanitize(url))
 
       raise UriError, "Cannot extract path from URL: #{url}" if uri.path.nil? || uri.path.empty?
 
