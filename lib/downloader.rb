@@ -38,5 +38,7 @@ module Downloader
     File.open(filename, 'w') do |f|
       f.write(HTTP.get(url))
     end
+
+    filename
   end
 end
