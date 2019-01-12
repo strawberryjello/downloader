@@ -41,6 +41,13 @@ Download multiple files whose URLs are saved to a text file:
 Downloader.batch("/path/to/file", "/path/to/destination/directory")
 ```
 
+Command-line options for `Downloader.batch` can be passed in via a hash, eg:
+
+```ruby
+options = {:numbered_files => true}
+Downloader.batch("/path/to/file", "/path/to/destination/directory", options)
+```
+
 ### CLI
 
 `Downloader.download` and `Downloader.batch` are available via CLI by running the `exe/downloader` executable.
@@ -56,6 +63,10 @@ Download a single file:
 Download multiple files:
 
     $ bundle exec exe/downloader batch /path/to/file /path/to/destination/directory
+
+A `help` command is also available (Thor built-in) that will display the options for each command, eg:
+
+    $ bundle exec exe/downloader help batch
 
 ## Development
 
