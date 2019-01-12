@@ -8,8 +8,9 @@ module Downloader
     end
 
     desc "batch FILE DEST", "download all URLs in FILE to DEST directory"
+    option :numbered_files, :type => :boolean, :desc => "rename files to be downloaded with numbers according to their order in the input file; file extensions, if any, will be retained"
     def batch(input_file, dest)
-      Downloader.batch(input_file, dest)
+      Downloader.batch(input_file, dest, options)
     end
 
     desc "download URL", "download URL to current directory"

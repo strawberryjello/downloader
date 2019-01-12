@@ -6,8 +6,12 @@ require 'logger'
 require 'uri'
 
 module Downloader
-  def self.batch(input_file, dest)
+
+  # TODO: refactor this
+  def self.batch(input_file, dest, options=nil)
     logger = Logger.new(STDOUT)
+
+    logger.debug("Options: #{options}")
 
     # TODO: add file error handling (new error class)
     urls = File.open(input_file, 'r').readlines
@@ -18,12 +22,13 @@ module Downloader
 
     http = HTTP.persistent(host_with_scheme)
 
-    urls.each do |url|
+    urls.each_with_index do |url, i|
       relative_ref = UrlHelper.extract_relative_ref(url)
 
-      logger.info("Downloading #{relative_ref}")
+      # note Hash#dig: just in case options is nil
+      filename = UrlHelper.create_filename(url, options.dig("numbered_files"), i+1)
+      logger.info("Downloading #{relative_ref} - filename: #{filename}")
 
-      filename = UrlHelper.extract_filename(url)
       File.open(File.join(dest, filename), 'w') do |f|
         f.write(http.get(relative_ref))
       end
