@@ -7,6 +7,7 @@ module Downloader
 
     # TODO: add escaping, etc
     def self.sanitize(url)
+      return "" unless url
       url.strip
     end
 

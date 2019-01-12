@@ -4,6 +4,24 @@ require "downloader/errors"
 require 'uri'
 
 RSpec.describe Downloader::UrlHelper do
+  describe '#sanitize' do
+    it 'strips whitespace from the input URL' do
+      expect(Downloader::UrlHelper.sanitize("\n https://www.example.com\n ")).to eq("https://www.example.com")
+    end
+
+    it 'returns the input URL unchanged if it has no leading or trailing whitespace' do
+      expect(Downloader::UrlHelper.sanitize("https://www.example.com")).to eq("https://www.example.com")
+    end
+
+    it 'returns an empty string when the input URL is an empty string' do
+      expect(Downloader::UrlHelper.sanitize("")).to eq("")
+    end
+
+    it 'returns an empty string when the input URL is nil' do
+      expect(Downloader::UrlHelper.sanitize(nil)).to eq("")
+    end
+  end
+
   describe '#extract_host_with_scheme' do
     it 'extracts the host and scheme of a URL as one string' do
       expect(Downloader::UrlHelper.extract_host_with_scheme("https://www.example.com")).to eq(URI("https://www.example.com"))
