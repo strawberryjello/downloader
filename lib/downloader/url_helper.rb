@@ -1,3 +1,5 @@
+require "downloader/filename_utils"
+
 module Downloader
   class UrlHelper
     HTTP_SCHEME = "http"
@@ -9,6 +11,13 @@ module Downloader
     def self.sanitize(url)
       return "" unless url
       url.strip
+    end
+
+    def self.create_filename(url, numbered_files, number)
+      original_filename = extract_filename(url)
+      numbered_files ?
+        FilenameUtils.rename_to_number(original_filename, number) :
+        original_filename
     end
 
     def self.extract_host_with_scheme(url)
