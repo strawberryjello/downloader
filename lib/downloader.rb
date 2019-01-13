@@ -20,14 +20,33 @@ module Downloader
     end
   end
 
+  def self.get_host_with_scheme(url, options)
+    logger = Logger.new(STDOUT)
+
+    begin
+      options&.dig("scheme_host") || UrlHelper.extract_host_with_scheme(url)
+    rescue UriError => e
+      logger.error("Error while parsing scheme: #{e}")
+      logger.error(%q(
+Possible solutions:
+- Check your input file. If the URLs are relative, use the
+  --scheme-host option to provide the scheme and host.
+- If using the --scheme-host option, check if it's correct.
+- If the URLs are absolute, check if the scheme and host are
+  correct.
+Note: Only http and https are supported.
+        ))
+      exit
+    end
+  end
+
   # TODO: refactor this
   def self.batch(input_file, dest, options=nil)
     logger = Logger.new(STDOUT)
     logger.debug("Options: #{options}")
 
     urls = read_input_file(input_file)
-
-    host_with_scheme = UrlHelper.extract_host_with_scheme(urls[0])
+    host_with_scheme = get_host_with_scheme(urls[0], options)
 
     logger.info("Connecting to #{host_with_scheme}")
 

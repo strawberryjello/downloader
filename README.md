@@ -64,6 +64,14 @@ Download multiple files:
 
     $ bundle exec exe/downloader batch /path/to/file /path/to/destination/directory
 
+#### CLI Options
+
+`Downloader.batch` accepts the ff. options:
+
+- `--numbered-files` - Rename files to be downloaded with numbers according to their order in the input file; file extensions, if any, will be retained
+
+- `--scheme-host` - The scheme and host in one string, for files containing relative URLs
+
 A `help` command is also available (Thor built-in) that will display the options for each command, eg:
 
     $ bundle exec exe/downloader help batch
