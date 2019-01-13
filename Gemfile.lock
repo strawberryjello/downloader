@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    downloader (0.1.1)
+    downloader (0.2.0)
       http (~> 4.0.0)
       thor (~> 0.20.3)
 
