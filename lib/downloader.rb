@@ -7,13 +7,25 @@ require 'uri'
 
 module Downloader
 
+  def self.read_input_file(file)
+    logger = Logger.new(STDOUT)
+
+    begin
+      File.open(file, 'r').
+        readlines(chomp: true).
+        reject { |u| u.empty? }
+    rescue SystemCallError
+      logger.error("Could not load input file: #{file}")
+      exit
+    end
+  end
+
   # TODO: refactor this
   def self.batch(input_file, dest, options=nil)
     logger = Logger.new(STDOUT)
     logger.debug("Options: #{options}")
 
-    # TODO: add file error handling (new error class)
-    urls = File.open(input_file, 'r').readlines
+    urls = read_input_file(input_file)
 
     host_with_scheme = UrlHelper.extract_host_with_scheme(urls[0])
 
