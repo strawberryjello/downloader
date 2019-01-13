@@ -10,7 +10,6 @@ module Downloader
   # TODO: refactor this
   def self.batch(input_file, dest, options=nil)
     logger = Logger.new(STDOUT)
-
     logger.debug("Options: #{options}")
 
     # TODO: add file error handling (new error class)
@@ -26,7 +25,7 @@ module Downloader
       relative_ref = UrlHelper.extract_relative_ref(url)
 
       # note & operator and Hash#dig: just in case options is nil
-      filename = UrlHelper.create_filename(url, options&.dig("numbered_files"), i+1)
+      filename = UrlHelper.create_filename(url, options&.dig(:numbered_filenames), i+1)
       logger.info("Downloading #{relative_ref} - filename: #{filename}")
 
       File.open(File.join(dest, filename), 'w') do |f|

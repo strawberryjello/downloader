@@ -1,4 +1,5 @@
 require "downloader/filename_utils"
+require 'logger'
 
 module Downloader
   class UrlHelper
@@ -13,9 +14,12 @@ module Downloader
       url.strip
     end
 
-    def self.create_filename(url, numbered_files, number)
+    def self.create_filename(url, numbered_filenames, number)
+      logger = Logger.new(STDOUT)
+      logger.debug("Create numbered filenames? #{numbered_filenames}")
+
       original_filename = extract_filename(url)
-      numbered_files ?
+      numbered_filenames ?
         FilenameUtils.rename_to_number(original_filename, number) :
         original_filename
     end
