@@ -16,6 +16,7 @@ module Downloader
 
     def self.create_filename(url, numbered_filenames, number)
       logger = Logger.new(STDOUT)
+      logger.level = Logger::WARN # change this if debugging
       logger.debug("Create numbered filenames? #{numbered_filenames}")
 
       original_filename = extract_filename(url)
