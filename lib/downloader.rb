@@ -1,15 +1,14 @@
 require "downloader/version"
 require "downloader/errors"
+require "downloader/loggable"
 require "downloader/url_helper"
 require 'http'
-require 'logger'
 require 'uri'
 
 module Downloader
+  extend Loggable
 
   def self.read_input_file(file)
-    logger = Logger.new(STDOUT)
-
     begin
       File.open(file, 'r').
         readlines(chomp: true).
@@ -21,8 +20,6 @@ module Downloader
   end
 
   def self.get_host_with_scheme(url, options)
-    logger = Logger.new(STDOUT)
-
     begin
       options&.dig("scheme_host") || UrlHelper.extract_host_with_scheme(url)
     rescue UriError => e
@@ -42,7 +39,6 @@ Note: Only http and https are supported.
 
   # TODO: refactor this
   def self.batch(input_file, dest, options=nil)
-    logger = Logger.new(STDOUT)
     logger.debug("Options: #{options}")
 
     urls = read_input_file(input_file)

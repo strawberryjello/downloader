@@ -1,8 +1,10 @@
 require "downloader/filename_utils"
-require 'logger'
+require 'downloader/loggable'
 
 module Downloader
   class UrlHelper
+    extend Loggable
+
     HTTP_SCHEME = "http"
     HTTPS_SCHEME = "https"
 
@@ -15,8 +17,6 @@ module Downloader
     end
 
     def self.create_filename(url, numbered_filenames, number)
-      logger = Logger.new(STDOUT)
-      logger.level = Logger::WARN # change this if debugging
       logger.debug("Create numbered filenames? #{numbered_filenames}")
 
       original_filename = extract_filename(url)
