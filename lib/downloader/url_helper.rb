@@ -17,7 +17,7 @@ module Downloader
     end
 
     def self.create_filename(url, numbered_filenames, number)
-      logger.debug("Create numbered filenames? #{numbered_filenames}")
+      # logger.debug("Create numbered filenames? #{numbered_filenames}")
 
       original_filename = extract_filename(url)
       numbered_filenames ?
