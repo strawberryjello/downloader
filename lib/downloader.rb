@@ -37,6 +37,20 @@ Note: Only http and https are supported.
     end
   end
 
+  def self.do_get(http, ref)
+    response = http.get(ref)
+    logger.debug(response.status)
+
+    if HTTP::Redirector::REDIRECT_CODES.include?(response.status.code)
+      response = http.follow.get(ref)
+      logger.debug("Followed redirect, new response status: #{response.status}")
+    end
+
+    # to_s must be called so the response will be consumed
+    # before the next (persistent) request is made
+    response.to_s
+  end
+
   # TODO: refactor this
   def self.batch(input_file, dest, options=nil)
     logger.debug("Options: #{options}")
@@ -56,7 +70,7 @@ Note: Only http and https are supported.
       logger.info("Downloading #{relative_ref} - filename: #{filename}")
 
       File.open(File.join(dest, filename), 'w') do |f|
-        f.write(http.get(relative_ref))
+        f.write(do_get(http, relative_ref))
       end
     end
 
