@@ -48,7 +48,7 @@ Note: Only http and https are supported.
 
     # to_s must be called so the response will be consumed
     # before the next (persistent) request is made
-    response.to_s
+    response.body.to_s
   end
 
   # TODO: refactor this
