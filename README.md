@@ -68,7 +68,7 @@ Download multiple files:
 
 `Downloader.batch` accepts the ff. options:
 
-- `--numbered-files` - Rename files to be downloaded with numbers according to their order in the input file; file extensions, if any, will be retained
+- `--numbered-filenames` - Rename files to be downloaded with numbers according to their order in the input file; file extensions, if any, will be retained
 
 - `--scheme-host` - The scheme and host in one string, for files containing relative URLs
 
