@@ -15,7 +15,7 @@ module Downloader
         reject { |u| u.empty? }
     rescue SystemCallError
       logger.error("Could not load input file: #{file}")
-      exit
+      exit(1)
     end
   end
 
@@ -33,7 +33,7 @@ Possible solutions:
   correct.
 Note: Only http and https are supported.
         ))
-      exit
+      exit(1)
     end
   end
 
