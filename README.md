@@ -1,6 +1,6 @@
 # Downloader
 
-Automates file downloads. Supports batch downloading via newline-delimited link dump in a text file. Uses [http.rb](https://github.com/httprb/http) under the hood and [Thor](https://github.com/erikhuda/thor) for the CLI. Written for learning purposes.
+Automates file downloads. Supports batch downloading via newline-delimited link dump in a text file. Uses [http.rb](https://github.com/httprb/http) and [Addressable](https://github.com/sporkmonger/addressable) under the hood and [Thor](https://github.com/erikhuda/thor) for the CLI. Written for learning purposes.
 
 ## Documentation
 
@@ -68,7 +68,7 @@ Download multiple files:
 
 `Downloader.batch` accepts the ff. options:
 
-- `--numbered-files` - Rename files to be downloaded with numbers according to their order in the input file; file extensions, if any, will be retained
+- `--numbered-filenames` - Rename files to be downloaded with numbers according to their order in the input file; file extensions, if any, will be retained
 
 - `--scheme-host` - The scheme and host in one string, for files containing relative URLs
 
