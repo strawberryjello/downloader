@@ -8,7 +8,7 @@ module Downloader
     extend Loggable
 
     # include % for escaped characters
-    FILENAME_REGEX = %r{\/(?<filename>[a-zA-Z0-9%!_.\-]+)$}
+    FILENAME_REGEX = %r{\/(?<filename>[a-zA-Z0-9%!_.,\-]+)$}
 
     # TODO: add escaping, etc
     def self.sanitize(url)

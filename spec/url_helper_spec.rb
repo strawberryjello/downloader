@@ -92,6 +92,14 @@ RSpec.describe Downloader::UrlHelper do
       expect(Downloader::UrlHelper.extract_filename("https://www.example.com/cats/[CM]-←-catting.jpg")).to eq("%5BCM%5D-%E2%86%90-catting.jpg")
     end
 
+    it 'extracts a filename with commas' do
+      expect(Downloader::UrlHelper.extract_filename("https://www.example.com/cats/cats,catting.jpg")).to eq("cats,catting.jpg")
+    end
+
+    it 'extracts a filename with exclamation marks' do
+      expect(Downloader::UrlHelper.extract_filename("https://www.example.com/cats/catting!.jpg")).to eq("catting!.jpg")
+    end
+
     it 'extracts a filename with an extension at the end of the URL path' do
       expect(Downloader::UrlHelper.extract_filename("https://www.example.com/cats/catting.jpg")).to eq("catting.jpg")
     end
