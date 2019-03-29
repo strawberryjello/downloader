@@ -62,6 +62,10 @@ RSpec.describe Downloader::UrlHelper do
       expect(Downloader::UrlHelper.extract_host_with_scheme("https://www.example.com\n")).to eq(Addressable::URI.parse("https://www.example.com"))
     end
 
+    it 'extracts the host and scheme of a URL using the scheme if provided' do
+      expect(Downloader::UrlHelper.extract_host_with_scheme("//www.example.com/cat.jpg", "https")).to eq(Addressable::URI.parse("https://www.example.com"))
+    end
+
     it 'ignores the userinfo' do
       expect(Downloader::UrlHelper.extract_host_with_scheme("https://user@www.example.com/")).to eq(Addressable::URI.parse("https://www.example.com"))
     end

@@ -25,10 +25,10 @@ module Downloader
         original_filename
     end
 
-    def self.extract_host_with_scheme(url)
+    def self.extract_host_with_scheme(url, user_scheme=nil)
       uri = Addressable::URI.parse(sanitize(url))
       host = uri.host
-      scheme = uri.scheme
+      scheme = user_scheme || uri.scheme
 
       raise UriError, "Missing scheme" unless scheme
 
