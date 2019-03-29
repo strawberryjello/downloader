@@ -31,6 +31,7 @@ module Downloader
       scheme = user_scheme || uri.scheme
 
       raise UriError, "Missing scheme" unless scheme
+      raise UriError, "Missing host" if host.nil? || host.empty?
 
       Addressable::URI.new(host: host, scheme: scheme)
     end

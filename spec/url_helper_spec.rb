@@ -89,7 +89,15 @@ RSpec.describe Downloader::UrlHelper do
     it 'raises a UriError when scheme is missing' do
       expect { Downloader::UrlHelper.extract_host_with_scheme("www.example.com") }.to raise_error(Downloader::UriError, 'Missing scheme')
     end
-  end
+
+    it 'raises a UriError when the URL has a scheme but no host' do
+      expect { Downloader::UrlHelper.extract_host_with_scheme("https:///cat.jpg") }.to raise_error(Downloader::UriError, 'Missing host')
+    end
+
+    it 'raises a UriError when the scheme is provided, but the URL lacks the host' do
+      expect { Downloader::UrlHelper.extract_host_with_scheme("/cat.jpg", "https") }.to  raise_error(Downloader::UriError, 'Missing host')
+    end
+ end
 
   describe '::extract_filename' do
     it 'extracts a filename with escaped Unicode characters and an extension from a URL with unescaped Unicode characters' do
