@@ -10,6 +10,7 @@ module Downloader
     desc "batch FILE DEST", "download all URLs in FILE to DEST directory"
     option :numbered_filenames, :type => :boolean, :desc => "rename files to be downloaded with numbers according to their order in the input file; file extensions, if any, will be retained"
     option :scheme_host, :desc => "the scheme and host in one string, for files containing relative URLs"
+    option :scheme, :desc => "the scheme, for files containing scheme-less URLs"
     def batch(input_file, dest)
       Downloader.batch(input_file, dest, options)
     end
