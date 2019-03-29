@@ -22,7 +22,7 @@ module Downloader
   def self.get_host_with_scheme(url, options)
     begin
       options&.dig("scheme_host") ||
-        UrlHelper.extract_host_with_scheme(url)
+        UrlHelper.extract_host_with_scheme(url, options&.dig("scheme"))
     rescue UriError => e
       logger.error("Error while parsing scheme: #{e}")
       logger.error(%q(
