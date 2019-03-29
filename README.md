@@ -72,6 +72,8 @@ Download multiple files:
 
 - `--scheme-host` - The scheme and host in one string, for files containing relative URLs
 
+- `--scheme` - The scheme, for files containing scheme-less URLs
+
 A `help` command is also available (Thor built-in) that will display the options for each command, eg:
 
     $ bundle exec exe/downloader help batch
