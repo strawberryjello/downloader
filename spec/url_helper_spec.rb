@@ -5,7 +5,7 @@ require "downloader/errors"
 require "addressable/uri"
 
 RSpec.describe Downloader::UrlHelper do
-  describe '#sanitize' do
+  describe '::sanitize' do
     it 'strips whitespace from the input URL' do
       expect(Downloader::UrlHelper.sanitize("\n https://www.example.com\n ")).to eq("https://www.example.com")
     end
@@ -23,7 +23,7 @@ RSpec.describe Downloader::UrlHelper do
     end
   end
 
-  describe '#create_filename' do
+  describe '::create_filename' do
     it 'creates a filename extracted from a URL when numbered_files=nil and number=nil' do
       expect(Downloader::UrlHelper.create_filename("https://www.example.com/cat.jpg", nil, nil)).to eq("cat.jpg")
     end
@@ -53,7 +53,7 @@ RSpec.describe Downloader::UrlHelper do
     end
   end
 
-  describe '#extract_host_with_scheme' do
+  describe '::extract_host_with_scheme' do
     it 'extracts the host and scheme of a URL as one string' do
       expect(Downloader::UrlHelper.extract_host_with_scheme("https://www.example.com")).to eq(Addressable::URI.parse("https://www.example.com"))
     end
@@ -87,7 +87,7 @@ RSpec.describe Downloader::UrlHelper do
     end
   end
 
-  describe '#extract_filename' do
+  describe '::extract_filename' do
     it 'extracts a filename with escaped Unicode characters and an extension from a URL with unescaped Unicode characters' do
       expect(Downloader::UrlHelper.extract_filename("https://www.example.com/cats/[CM]-←-catting.jpg")).to eq("%5BCM%5D-%E2%86%90-catting.jpg")
     end
@@ -153,7 +153,7 @@ RSpec.describe Downloader::UrlHelper do
     end
   end
 
-  describe '#extract_relative_ref' do
+  describe '::extract_relative_ref' do
     it 'extracts a relative reference from a URL with a path' do
       expect(Downloader::UrlHelper.extract_relative_ref("https://www.example.com/cats")).to eq(Addressable::URI.parse("/cats"))
     end
