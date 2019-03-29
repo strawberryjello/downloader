@@ -24,15 +24,16 @@ module Downloader
       options&.dig("scheme_host") ||
         UrlHelper.extract_host_with_scheme(url, options&.dig("scheme"))
     rescue UriError => e
-      logger.error("Error while parsing scheme: #{e}")
+      logger.error("Error while parsing URL: #{e}")
       logger.error(%q(
 Possible solutions:
 - Check your input file. If the URLs are relative, use the
   --scheme-host option to provide the scheme and host.
 - If using the --scheme-host option, check if it's correct.
+- If the URLs are missing a scheme but not the host, use the
+  --scheme option to provide the scheme.
 - If the URLs are absolute, check if the scheme and host are
   correct.
-Note: Only http and https are supported.
         ))
       exit(1)
     end
