@@ -5,6 +5,12 @@ The format is based partly on [Keep a Changelog](https://keepachangelog.com/en/1
 
 NOTE: The changelogs for each release are included in the message of the corresponding annotated tag.
 
+## [0.3.1] - 2019-06-21
+- Setup for Travis CI and Coveralls
+- Added MIT license file
+- Added CHANGELOG file
+- README updates, including badges for Travis CI, Coveralls, and Code Climate
+
 ## [0.3.0] - 2019-03-29
 - Add --scheme option to Downloader.batch
 - Update "missing scheme" error message
@@ -44,6 +50,7 @@ NOTE: The changelogs for each release are included in the message of the corresp
 - Added CLI using Thor based on the example in the Bundler gem-building guide
 - Added RSpec for tests; only helper classes are tested currently
 
+[0.3.1]: https://github.com/strawberryjello/downloader/releases/tag/v0.3.1
 [0.3.0]: https://github.com/strawberryjello/downloader/releases/tag/v0.3.0
 [0.2.6]: https://github.com/strawberryjello/downloader/releases/tag/v0.2.6
 [0.2.5]: https://github.com/strawberryjello/downloader/releases/tag/v0.2.5
