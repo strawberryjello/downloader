@@ -1,5 +1,9 @@
 # Downloader
 
+[![Build Status](https://travis-ci.org/strawberryjello/downloader.svg?branch=master)](https://travis-ci.org/strawberryjello/downloader)
+[![Coverage Status](https://coveralls.io/repos/github/strawberryjello/downloader/badge.svg?branch=master)](https://coveralls.io/github/strawberryjello/downloader?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/3daad91d43a6ba971351/maintainability)](https://codeclimate.com/github/strawberryjello/downloader/maintainability)
+
 Automates file downloads. Supports batch downloading via newline-delimited link dump in a text file. Uses [http.rb](https://github.com/httprb/http) and [Addressable](https://github.com/sporkmonger/addressable) under the hood and [Thor](https://github.com/erikhuda/thor) for the CLI. Written for learning purposes.
 
 ## Installation
