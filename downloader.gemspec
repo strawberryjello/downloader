@@ -8,6 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Downloader::VERSION
   spec.authors       = ["Cristina Elep"]
   spec.email         = ["cristina@elep.name"]
+  spec.licenses      = ['MIT']
 
   spec.summary       = %q{A simple file downloader, written for practice.}
   # spec.description   = %q{TODO: Write a longer description or delete this line.}
