@@ -4,23 +4,29 @@
 [![Coverage Status](https://coveralls.io/repos/github/strawberryjello/downloader/badge.svg?branch=master)](https://coveralls.io/github/strawberryjello/downloader?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/3daad91d43a6ba971351/maintainability)](https://codeclimate.com/github/strawberryjello/downloader/maintainability)
 
-Automates file downloads. Supports batch downloading via newline-delimited link dump in a text file. Uses [http.rb](https://github.com/httprb/http) and [Addressable](https://github.com/sporkmonger/addressable) under the hood and [Thor](https://github.com/erikhuda/thor) for the CLI. Written for learning purposes.
+Automates file downloads. Supports batch downloading via newline-delimited link dump in a text file. Uses [http.rb](https://github.com/httprb/http) and [Addressable](https://github.com/sporkmonger/addressable) under the hood and [Thor](https://github.com/erikhuda/thor) for the CLI.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'downloader'
+gem "downloader", git: "https://github.com/strawberryjello/downloader.git"
+```
+
+This pulls from the master branch by default. You can also specify a version, eg:
+
+```ruby
+gem "downloader", "0.3.1", git: "https://github.com/strawberryjello/downloader.git"
 ```
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
+Or install it yourself by cloning the repo and running the ff. in the root directory:
 
-    $ gem install downloader
+    $ rake install
 
 ## Usage
 
@@ -46,19 +52,19 @@ Downloader.batch("/path/to/file", "/path/to/destination/directory", options)
 
 ### CLI
 
-`Downloader.download` and `Downloader.batch` are available via CLI by running the `exe/downloader` executable.
+`Downloader.download` and `Downloader.batch` are available via CLI. You can also run the commands during development using `bundle exec exe/downloader <command> <options>`.
 
 List the available commands:
 
-    $ bundle exec exe/downloader
+    $ downloader
 
 Download a single file:
 
-    $ bundle exec exe/downloader download <url>
+    $ downloader download <url>
 
 Download multiple files:
 
-    $ bundle exec exe/downloader batch /path/to/file /path/to/destination/directory
+    $ downloader batch /path/to/file /path/to/destination/directory
 
 #### CLI Options
 
@@ -72,4 +78,10 @@ Download multiple files:
 
 A `help` command is also available (Thor built-in) that will display the options for each command, eg:
 
-    $ bundle exec exe/downloader help batch
+    $ downloader help batch
+
+## Tests and Documentation Coverage
+
+Tests can be run locally using `rspec` or `rake` in the top-level directory.
+
+To check documentation coverage (provided by [Inch](https://github.com/rrrene/inch)), run `inch` in the top-level directory.
