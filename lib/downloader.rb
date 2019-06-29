@@ -8,6 +8,10 @@ require 'uri'
 module Downloader
   extend Loggable
 
+  # Returns the contents of +file+ as an array of lines after removing empty lines and newlines
+  #
+  # Exits with a nonzero value (1) when +file+ can't be loaded
+
   def self.read_input_file(file)
     begin
       File.open(file, 'r').
@@ -18,6 +22,12 @@ module Downloader
       exit(1)
     end
   end
+
+  # Returns the value of scheme_host in +options+ if it exists, otherwise
+  # extracts the scheme and host as one string from +url+
+  #
+  # Exits with a nonzero value (1) and an error message with troubleshooting tips
+  # when UrlHelper throws a UriError
 
   def self.get_host_with_scheme(url, options)
     begin
@@ -39,6 +49,9 @@ Possible solutions:
     end
   end
 
+  # Makes the HTTP GET request for +ref+ using +http+, follows redirects
+  # Returns the response body as a string
+
   def self.do_get(http, ref)
     response = http.get(ref)
     logger.debug(response.status)
@@ -53,7 +66,16 @@ Possible solutions:
     response.body.to_s
   end
 
-  # TODO: refactor this
+  # Downloads the files pointed to by the URLs in +input_file+ to the path specified by +dest+
+  #
+  # Accepts an optional +options+ hash
+  # - the optional numbered_filenames flag for renaming downloaded files can be passed in via +options+
+  #
+  # Example
+  #
+  # Downloader.batch("urls.txt", ".", {})
+  # # => downloads the files from the URLs in urls.txt to the current directory
+
   def self.batch(input_file, dest, options=nil)
     logger.debug("Options: #{options}")
 
@@ -78,6 +100,9 @@ Possible solutions:
 
     http.close
   end
+
+  # Downloads the file at +url+ to the current directory
+  # Returns the original filename of the downloaded file
 
   def self.download(url)
     filename = UrlHelper.extract_filename(url)

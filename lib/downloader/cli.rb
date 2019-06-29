@@ -2,6 +2,12 @@ require 'thor'
 require 'downloader'
 
 module Downloader
+
+  # CLI class, extends Thor.
+  #
+  # Methods are exposed as commands; unless specified, params are required.
+  # Usage descriptions and options are specified using Thor's syntax.
+
   class CLI < Thor
     def self.exit_on_failure?
       true
