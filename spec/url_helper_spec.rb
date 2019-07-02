@@ -49,7 +49,11 @@ RSpec.describe Downloader::UrlHelper do
     end
 
     it 'raises a UriError when URL is nil' do
-      expect { Downloader::UrlHelper.create_filename(nil, nil, nil) }.to raise_error(Downloader::UriError, "Cannot extract filename from path: ")
+      expect { Downloader::UrlHelper.create_filename(nil, nil, nil) }.to raise_error(Downloader::UriError, "Missing URL")
+    end
+
+    it 'raises a UriError when URL is an empty string' do
+      expect { Downloader::UrlHelper.create_filename("", nil, nil) }.to raise_error(Downloader::UriError, "Missing URL")
     end
   end
 
@@ -161,7 +165,7 @@ RSpec.describe Downloader::UrlHelper do
     end
 
     it 'raises a UriError when a filename cannot be extracted' do
-      expect { Downloader::UrlHelper.extract_filename("https://www.example.com/cats/") }.to raise_error(Downloader::UriError, "Cannot extract filename from path: /cats/")
+      expect { Downloader::UrlHelper.extract_filename("") }.to raise_error(Downloader::UriError, "Cannot extract filename from URL: ")
     end
   end
 

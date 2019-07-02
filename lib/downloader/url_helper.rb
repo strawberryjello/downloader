@@ -11,9 +11,6 @@ module Downloader
   class UrlHelper
     extend Loggable
 
-    # include % for escaped characters
-    FILENAME_REGEX = %r{\/(?<filename>[a-zA-Z0-9%!_.,\-]+)$}
-
     # TODO: add escaping, etc
     def self.sanitize(url)
       return "" unless url
@@ -23,8 +20,12 @@ module Downloader
     # Returns the filename to be used for the file at +url+
     #
     # Sets the filename to +number+ if +numbered_filenames+ is true, otherwise returns the original filename
+    #
+    # Raises a UriError if the URL is nil/empty
 
     def self.create_filename(url, numbered_filenames, number)
+      raise UriError, "Missing URL" if url.nil? || url.empty?
+
       # logger.debug("Create numbered filenames? #{numbered_filenames}")
 
       original_filename = extract_filename(url)
@@ -56,11 +57,10 @@ module Downloader
 
     def self.extract_filename(url)
       uri = Addressable::URI.parse(sanitize(url)).normalize
-      path = uri.path
 
-      filename = path.slice(FILENAME_REGEX, "filename")&.chomp
+      filename = uri.basename
 
-      raise UriError, "Cannot extract filename from path: #{path}" unless filename
+      raise UriError, "Cannot extract filename from URL: #{url}" if filename.nil? || filename.empty?
 
       filename
     end
