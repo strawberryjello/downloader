@@ -5,6 +5,12 @@ The format is based partly on [Keep a Changelog](https://keepachangelog.com/en/1
 
 NOTE: The changelogs for each release are included in the message of the corresponding annotated tag.
 
+## [0.3.2] - 2019-07-02
+- README and in-line documentation updates
+- Specified MIT license in gemspec
+- Re-enabled Bundler's built-in Rake tasks
+- Removed filename regex from UrlHelper, used Addressable::URI#basename instead
+
 ## [0.3.1] - 2019-06-21
 - Setup for Travis CI and Coveralls
 - Added MIT license file
@@ -50,6 +56,7 @@ NOTE: The changelogs for each release are included in the message of the corresp
 - Added CLI using Thor based on the example in the Bundler gem-building guide
 - Added RSpec for tests; only helper classes are tested currently
 
+[0.3.2]: https://github.com/strawberryjello/downloader/releases/tag/v0.3.2
 [0.3.1]: https://github.com/strawberryjello/downloader/releases/tag/v0.3.1
 [0.3.0]: https://github.com/strawberryjello/downloader/releases/tag/v0.3.0
 [0.2.6]: https://github.com/strawberryjello/downloader/releases/tag/v0.2.6
