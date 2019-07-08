@@ -11,6 +11,10 @@ module Downloader
   # Returns the contents of +file+ as an array of lines after removing empty lines and newlines
   #
   # Exits with a nonzero value (1) when +file+ can't be loaded
+  #
+  # Example
+  #
+  #   read_input_file("in.txt")
 
   def self.read_input_file(file)
     begin
@@ -28,6 +32,11 @@ module Downloader
   #
   # Exits with a nonzero value (1) and an error message with troubleshooting tips
   # when UrlHelper throws a UriError
+  #
+  # Example
+  #
+  #   get_host_with_scheme("https://example.com/cats", options_hash)
+  #   # => "https://example.com"
 
   def self.get_host_with_scheme(url, options)
     begin
@@ -73,8 +82,8 @@ Possible solutions:
   #
   # Example
   #
-  # Downloader.batch("urls.txt", ".", {})
-  # # => downloads the files from the URLs in urls.txt to the current directory
+  #   Downloader.batch("urls.txt", ".", {})
+  #   # => downloads the files from the URLs in urls.txt to the current directory
 
   def self.batch(input_file, dest, options=nil)
     logger.debug("Options: #{options}")

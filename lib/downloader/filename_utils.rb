@@ -1,4 +1,7 @@
 module Downloader
+
+  # Utils class for manipulating filenames
+
   class FilenameUtils
 
     # Returns a new filename with +number+ as the base, followed by the extension
@@ -6,7 +9,7 @@ module Downloader
     #
     # Example
     #
-    # rename_to_number("cat.jpg", "1") # => "1.jpg"
+    #   rename_to_number("cat.jpg", "1") # => "1.jpg"
 
     def self.rename_to_number(filename, number)
       raise FilenameError, "Missing filename" unless filename
