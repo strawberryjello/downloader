@@ -85,3 +85,7 @@ A `help` command is also available (Thor built-in) that will display the options
 Tests can be run locally using `rspec` or `rake` in the top-level directory.
 
 To check documentation coverage (provided by [Inch](https://github.com/rrrene/inch)), run `inch` in the top-level directory.
+
+## License
+
+This project is licensed under the [MIT license](https://choosealicense.com/licenses/mit/).
