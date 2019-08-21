@@ -10,13 +10,13 @@ Automates file downloads. Supports batch downloading via newline-delimited link 
 
 Add this line to your application's Gemfile:
 
-```ruby
+```
 gem "downloader", git: "https://github.com/strawberryjello/downloader.git"
 ```
 
 This pulls from the master branch by default. You can also specify a version, eg:
 
-```ruby
+```
 gem "downloader", "0.3.1", git: "https://github.com/strawberryjello/downloader.git"
 ```
 
@@ -32,21 +32,21 @@ Or install it yourself by cloning the repo and running the ff. in the root direc
 
 Download a single file:
 
-```ruby
+```
 Downloader.download(<URL>)
 ```
 - Note: This will also return the original filename of the file you downloaded
 
 Download multiple files whose URLs are saved to a text file:
 
-```ruby
+```
 Downloader.batch("/path/to/file", "/path/to/destination/directory")
 ```
 
 Command-line options for `Downloader.batch` can be passed in via a hash, eg:
 
-```ruby
-options = {:numbered_files => true}
+```
+options = {:numbered_filenames => true}
 Downloader.batch("/path/to/file", "/path/to/destination/directory", options)
 ```
 
