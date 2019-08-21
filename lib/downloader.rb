@@ -12,7 +12,10 @@ module Downloader
   #
   # Exits with a nonzero value (1) when +file+ can't be loaded
   #
-  # Example
+  # @param file [String] the input file
+  # @return [Array] the non-empty lines in the input file
+  #
+  # Example:
   #
   #   read_input_file("in.txt")
 
@@ -33,7 +36,11 @@ module Downloader
   # Exits with a nonzero value (1) and an error message with troubleshooting tips
   # when UrlHelper throws a UriError
   #
-  # Example
+  # @param url [String] the source URL
+  # @param options [Hash] the hash containing command-line options
+  # @return [String] the host and scheme as one string
+  #
+  # Example:
   #
   #   get_host_with_scheme("https://example.com/cats", options_hash)
   #   # => "https://example.com"
@@ -59,7 +66,10 @@ Possible solutions:
   end
 
   # Makes the HTTP GET request for +ref+ using +http+, follows redirects
-  # Returns the response body as a string
+  #
+  # @param http [HTTP] the HTTP object provided by http.rb
+  # @param ref [String] the relative ref to the file being downloaded
+  # @return [String] the response body
 
   def self.do_get(http, ref)
     response = http.get(ref)
@@ -77,10 +87,11 @@ Possible solutions:
 
   # Downloads the files pointed to by the URLs in +input_file+ to the path specified by +dest+
   #
-  # Accepts an optional +options+ hash
-  # - the optional numbered_filenames flag for renaming downloaded files can be passed in via +options+
+  # @param input_file [String] the path to the file containing the URLs to be downloaded from
+  # @param dest [String] the destination path
+  # @param options [Hash] optional hash for command-line options, see README for full list
   #
-  # Example
+  # Example:
   #
   #   Downloader.batch("urls.txt", ".", {})
   #   # => downloads the files from the URLs in urls.txt to the current directory
@@ -111,7 +122,9 @@ Possible solutions:
   end
 
   # Downloads the file at +url+ to the current directory
-  # Returns the original filename of the downloaded file
+  #
+  # @param url [String] the URL of the file to be downloaded
+  # @return [String] the original filename of the downloaded file
 
   def self.download(url)
     filename = UrlHelper.extract_filename(url)

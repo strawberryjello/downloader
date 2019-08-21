@@ -1,15 +1,19 @@
 module Downloader
 
-  # Utils class for manipulating filenames
+  # Utility class for manipulating filenames
 
   class FilenameUtils
 
     # Returns a new filename with +number+ as the base, followed by the extension
     # from +filename+
     #
-    # Example
+    # @param filename [String] the original filename
+    # @param number [Numeric] the number to be used for renaming
+    # @return [String] the new filename
     #
-    #   rename_to_number("cat.jpg", "1") # => "1.jpg"
+    # Example:
+    #
+    #   rename_to_number("cat.jpg", 1) # => "1.jpg"
 
     def self.rename_to_number(filename, number)
       raise FilenameError, "Missing filename" unless filename

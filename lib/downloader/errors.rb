@@ -1,8 +1,10 @@
 module Downloader
+  # Generic error class
   class Error < StandardError; end
 
+  # Error class used by UrlHelper
   class UriError < Error; end
 
-  # TODO: extract this if extracting FilenameUtils
+  # Error class used by FilenameUtils
   class FilenameError < Error; end
 end
