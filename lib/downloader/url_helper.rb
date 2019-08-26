@@ -11,22 +11,31 @@ module Downloader
   class UrlHelper
     extend Loggable
 
-    # Returns +url+ with extraneous special characters removed
+    # Returns +url+ with extraneous special characters removed.
     #
-    # TODO: add escaping, etc
+    # Currently only strips whitespace on both ends of +url+.
+    #
+    # @param url [String] the URL
+    # @return [String] the URL minus special characters, or the empty string if URL is nil
 
     def self.sanitize(url)
       return "" unless url
       url.strip
     end
 
-    # Returns the filename to be used for the file at +url+
+    # Returns the filename to be used for the file at +url+.
     #
-    # Sets the filename to +number+ if +numbered_filenames+ is true, otherwise returns the original filename
+    # Sets the file basename to +number+ if +numbered_filenames+ is true, otherwise returns the original filename.
+    # File extensions are left intact if present.
     #
-    # Raises a UriError if the URL is nil/empty
+    # Raises a UriError if the URL is nil/empty.
     #
-    # Example
+    # @param url [String] the URL
+    # @param numbered_filenames [Boolean] determines whether the filename portion of the URL will be replaced with a number
+    # @param number [Numeric] the number to be used in the filename if +numbered_filenames+ is true
+    # @return [String] the original filename, or the filename with the base replaced by +number+
+    #
+    # Example:
     #
     #   create_filename("https://example.com/cats/bleh.jpg", true, 1)
     #   # => "1.jpg"
@@ -42,16 +51,20 @@ module Downloader
         original_filename
     end
 
-    # Returns an Addressable::URI object with the host and scheme set
+    # Returns an Addressable::URI object with the host and scheme set.
     # - the host is extracted from +url+
     # - the scheme can be passed in via +user_scheme+ (eg, from the command-line options) or extracted from +url+
     #
-    # Raises a UriError if either scheme or host are missing or can't be extracted
+    # Raises a UriError if either scheme or host are missing or can't be extracted.
     #
-    # Example
+    # @param url [String] the URL
+    # @param user_scheme [String] the URL's scheme passed in via command-line
+    # @return [Addressable::URI] an Addressable::URI object with the host and scheme set
+    #
+    # Example:
     #
     #   extract_host_with_scheme("https://example.com/cats")
-    #   # => Addressable::URI containing "https://example.com"
+    #   # => #<Addressable::URI:0x2b11e0125d14 URI:https://example.com>
 
     def self.extract_host_with_scheme(url, user_scheme=nil)
       uri = Addressable::URI.parse(sanitize(url))
@@ -64,11 +77,14 @@ module Downloader
       Addressable::URI.new(host: host, scheme: scheme)
     end
 
-    # Returns the filename portion of +url+
+    # Returns the filename portion of +url+.
     #
-    # Raises a UriError if the filename can't be extracted
+    # Raises a UriError if the filename can't be extracted.
     #
-    # Example
+    # @param url [String] the URL
+    # @return [String] the filename portion of the URL
+    #
+    # Example:
     #
     #   extract_filename("https://example.com/cats/catting.jpg")
     #   # => "catting.jpg"
@@ -83,11 +99,15 @@ module Downloader
       filename
     end
 
-    # Returns the path portion of +url+
+    # Returns an Addressable::URI object containing the path portion of +url+.
+    # Includes the query and fragment portions if present.
     #
-    # Raises a UriError if the path can't be extracted
+    # Raises a UriError if the path can't be extracted.
     #
-    # Example
+    # @param url [String] the URL
+    # @return [Addressable::URI] an Addressable::URI object with the path set
+    #
+    # Example:
     #
     #   extract_relative_ref("https://example.com/cats/catting.jpg")
     #   # => "/cats/catting.jpg"

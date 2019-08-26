@@ -1,18 +1,21 @@
 require 'logger'
 
-# Provides an instance of the Ruby stdlib logger as a mixin
+# Provides an instance of the Ruby stdlib logger as a mixin.
 
 module Loggable
 
-  # Returns the instance used in logger calls, eg logger.debug()
+  # Instance method wrapping self.logger. This is the method invoked by logger calls, eg logger.debug()
+  #
+  # @return [Logger] an instance of the Ruby stdlib logger
 
   def logger
     Loggable.logger
   end
 
-  # Returns a new logger if the instance hasn't been created yet
-  #
+  # Returns the existing logger, or creates a new one if nonexistent.
   # Logs to STDOUT with the format: severity - datetime: msg
+  #
+  # @return [Logger] an instance of the Ruby stdlib logger
 
   def self.logger
     new_logger = Logger.new(STDOUT)

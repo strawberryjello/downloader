@@ -5,7 +5,7 @@ module Downloader
   class FilenameUtils
 
     # Returns a new filename with +number+ as the base, followed by the extension
-    # from +filename+
+    # from +filename+.
     #
     # @param filename [String] the original filename
     # @param number [Numeric] the number to be used for renaming
