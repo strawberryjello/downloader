@@ -35,6 +35,7 @@ Download a single file:
 ```
 Downloader.download(<URL>)
 ```
+
 - Note: This will also return the original filename of the file you downloaded
 
 Download multiple files whose URLs are saved to a text file:
