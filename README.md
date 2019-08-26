@@ -6,6 +6,10 @@
 
 Automates file downloads. Supports batch downloading via newline-delimited link dump in a text file. Uses [http.rb](https://github.com/httprb/http) and [Addressable](https://github.com/sporkmonger/addressable) under the hood and [Thor](https://github.com/erikhuda/thor) for the CLI.
 
+## Documentation
+
+Check out the API documentation [here](https://rubydoc.info/github/strawberryjello/downloader/master).
+
 ## Installation
 
 Add this line to your application's Gemfile:
