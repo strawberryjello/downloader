@@ -45,7 +45,7 @@ module Downloader
   #   get_host_with_scheme("https://example.com/cats", options_hash)
   #   # => "https://example.com"
 
-  def self.get_host_with_scheme(url, options)
+  def self.get_host_with_scheme(url, options=nil)
     begin
       options&.dig("scheme_host") ||
         UrlHelper.extract_host_with_scheme(url, options&.dig("scheme"))
