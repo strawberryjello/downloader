@@ -1,8 +1,8 @@
 module Downloader
 
-  # Utility class for manipulating filenames
+  # Utility class
 
-  class FilenameUtils
+  class Util
 
     # Returns a new filename with +number+ as the base, followed by the extension
     # from +filename+.
