@@ -1,8 +1,20 @@
 module Downloader
 
-  # Utility class
-
   class Util
+
+    # Writes +data+ to the file at +path+
+    #
+    # Returns the length written to the file (see Ruby documentation for IO::write)
+    #
+    # Example:
+    #
+    #   write_to_file("test.txt", "hello") # => 5
+
+    def self.write_to_file(path, data)
+      File.open(path, 'w') do |f|
+        f.write(data)
+      end
+    end
 
     # Returns the contents of +file+ as an array of lines after removing empty lines and newlines
     #

@@ -91,9 +91,7 @@ Possible solutions:
       filename = UrlHelper.create_filename(url, options&.dig('numbered_filenames'), i+1)
       logger.info("Downloading #{relative_ref} - filename: #{filename}")
 
-      File.open(File.join(dest, filename), 'w') do |f|
-        f.write(do_get(http, relative_ref))
-      end
+      Util.write_to_file(File.join(dest, filename), do_get(http, relative_ref))
     end
 
     http.close
@@ -107,9 +105,7 @@ Possible solutions:
   def self.download(url)
     filename = UrlHelper.extract_filename(url)
 
-    File.open(filename, 'w') do |f|
-      f.write(HTTP.get(url))
-    end
+    Util.write_to_file(filename, HTTP.get(url))
 
     filename
   end
