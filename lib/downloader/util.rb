@@ -2,18 +2,21 @@ module Downloader
 
   class Util
 
-    # Writes +data+ to the file at +path+
+    # Writes +data+ to the file at +path+. This will overwrite the file's contents
+    # if it already exists.
     #
     # Returns the length written to the file (see Ruby documentation for IO::write)
+    #
+    # @param path [String] path to file to be written to
+    # @param data [String] data to be written to the file
+    # @return [Numeric] length written to the file
     #
     # Example:
     #
     #   write_to_file("test.txt", "hello") # => 5
 
     def self.write_to_file(path, data)
-      File.open(path, 'w') do |f|
-        f.write(data)
-      end
+      File.write(path, data)
     end
 
     # Returns the contents of +file+ as an array of lines after removing empty lines and newlines
