@@ -25,7 +25,8 @@ module Downloader
     #
     # Example:
     #
-    #   read_input_file("in.txt")
+    #   read_input_file("test.txt") # file contains the string hello
+    #   => ["hello"]
 
     def self.read_input_file(file)
       begin
