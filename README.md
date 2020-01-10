@@ -10,6 +10,8 @@ Automates file downloads. Supports batch downloading via newline-delimited link 
 
 Check out the API documentation [here](https://rubydoc.info/github/strawberryjello/downloader/master).
 
+If you cloned the repo, you can generate the API documentation yourself using YARD by running `yard doc` in the top-level directory; the documentation will appear in a `doc` directory.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -28,7 +30,7 @@ And then execute:
 
     $ bundle
 
-Or install it yourself by cloning the repo and running the ff. in the root directory:
+Or install it yourself by cloning the repo and running the ff. in the top-level directory:
 
     $ rake install
 
