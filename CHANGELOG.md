@@ -5,6 +5,11 @@ The format is based partly on [Keep a Changelog](https://keepachangelog.com/en/1
 
 NOTE: The changelogs for each release are included in the message of the corresponding annotated tag.
 
+## [0.4.0] - 2020-10-05
+- New version/-v CLI command
+- Miscellaneous minor refactoring and documentation updates
+- Merged in pull requests from Github's Dependabot updating rake and json gems to 13.0 and 2.3.1 respectively
+
 ## [0.3.2] - 2019-07-02
 - README and in-line documentation updates
 - Specified MIT license in gemspec
