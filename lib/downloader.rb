@@ -8,28 +8,6 @@ require 'uri'
 module Downloader
   extend Loggable
 
-  # Returns the contents of +file+ as an array of lines after removing empty lines and newlines
-  #
-  # Exits with a nonzero value (1) when +file+ can't be loaded
-  #
-  # @param file [String] the input file
-  # @return [Array] the non-empty lines in the input file
-  #
-  # Example:
-  #
-  #   read_input_file("in.txt")
-
-  def self.read_input_file(file)
-    begin
-      File.open(file, 'r').
-        readlines(chomp: true).
-        reject { |u| u.empty? }
-    rescue SystemCallError
-      logger.error("Could not load input file: #{file}")
-      exit(1)
-    end
-  end
-
   # Returns the value of scheme_host in +options+ if it exists, otherwise
   # extracts the scheme and host as one string from +url+
   #
@@ -45,7 +23,7 @@ module Downloader
   #   get_host_with_scheme("https://example.com/cats", options_hash)
   #   # => "https://example.com"
 
-  def self.get_host_with_scheme(url, options)
+  def self.get_host_with_scheme(url, options=nil)
     begin
       options&.dig("scheme_host") ||
         UrlHelper.extract_host_with_scheme(url, options&.dig("scheme"))
@@ -99,7 +77,7 @@ Possible solutions:
   def self.batch(input_file, dest, options=nil)
     logger.debug("Options: #{options}")
 
-    urls = read_input_file(input_file)
+    urls = Util.read_input_file(input_file)
     host_with_scheme = get_host_with_scheme(urls[0], options)
 
     logger.info("Connecting to #{host_with_scheme}")
@@ -113,9 +91,7 @@ Possible solutions:
       filename = UrlHelper.create_filename(url, options&.dig('numbered_filenames'), i+1)
       logger.info("Downloading #{relative_ref} - filename: #{filename}")
 
-      File.open(File.join(dest, filename), 'w') do |f|
-        f.write(do_get(http, relative_ref))
-      end
+      Util.write_to_file(File.join(dest, filename), do_get(http, relative_ref))
     end
 
     http.close
@@ -129,9 +105,7 @@ Possible solutions:
   def self.download(url)
     filename = UrlHelper.extract_filename(url)
 
-    File.open(filename, 'w') do |f|
-      f.write(HTTP.get(url))
-    end
+    Util.write_to_file(filename, HTTP.get(url))
 
     filename
   end

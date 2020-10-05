@@ -10,12 +10,19 @@ module Downloader
 
   class CLI < Thor
 
+    map "-v" => :version
+
     # Make the generated executable report runtime failures correctly to the shell.
     # See: https://github.com/erikhuda/thor/wiki/Making-An-Executable
     #
     # @return [Boolean] true
     def self.exit_on_failure?
       true
+    end
+
+    desc "version", "display version number, shortcut: -v"
+    def version
+      puts Downloader::VERSION
     end
 
     desc "batch FILE DEST", "download all URLs in FILE to DEST directory"

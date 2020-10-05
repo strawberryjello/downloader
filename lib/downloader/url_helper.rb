@@ -1,6 +1,6 @@
 require 'addressable/uri'
 
-require "downloader/filename_utils"
+require "downloader/util"
 require 'downloader/loggable'
 
 module Downloader
@@ -47,7 +47,7 @@ module Downloader
 
       original_filename = extract_filename(url)
       numbered_filenames ?
-        FilenameUtils.rename_to_number(original_filename, number) :
+        Util.rename_to_number(original_filename, number) :
         original_filename
     end
 
